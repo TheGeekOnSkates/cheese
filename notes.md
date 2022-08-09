@@ -2,14 +2,13 @@
 
 ## On the "runner" side:
 
-* Finish ADD - I'm too tired to math. :P
-* Add all the other instructions
-* Reset the program counter and stack pointer when running is done - currently, NEW is automatic. :D
+* Do ADD
+* Do JUMP
+* Do IF_EQUAL
 
 ## On the "compiler" side:
 
 * Add some validation - I can just do "PRINT" by itself and it "compiles".
-* Add the DONE instruction to the LIST command's output
 
 ## When both compiler and runner are finished:
 
@@ -17,7 +16,20 @@
 * Add a command-line option, a file (maybe use the extension ".kso", lol).  That wasy I can just do i.e. "cheese my-test.kso" as I keep tinkering.
 * Oh, and add some docs, just cuz :)
 
-## Pipe dreaming beyond 1.0
+## Premature thoughts about version 1.1
+
+Once ADD is working, some easy additions (cheesy pun definitely intended) would be:
+
+* SUBTRACT
+* MULTIPLY
+* DIVIDE
+
+Also, Forth (which this language is starting to remind me more and more of) has some other features I think would be helpful:
+
+* SWAP
+* ROTATE (or just "ROT" in Forth - sorry, that is a word, with a very different meaning lol)
+
+## Pipe dreaming beyond 2.0
 
 * It would be nice to have an array that points to screen coordinates.  Like let's say I do:
 	PUSH 67		// Meaning the letter C
