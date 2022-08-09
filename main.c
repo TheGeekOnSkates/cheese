@@ -4,7 +4,8 @@ int main() {
 	char buffer[80];
 	uint16_t i = 0,
 		programCounter = 0,
-		stackPointer = 0;
+		stackPointer = 0,
+		temp = 0;
 	int16_t stack[65536],
 		program[65536];
 	
@@ -92,12 +93,30 @@ int main() {
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "RUN")) {
-			
-			
-			
-			
-			
-			
+			programCounter = stackPointer = 0;
+			while(true) {
+				switch(program[programCounter]) {
+					case DONE: break;
+					case PUSH:
+						programCounter++;
+						stack[stackPointer] = program[programCounter];
+						stackPointer++;
+						break;
+					case ADD:
+						temp = stack[stackPointer];
+						stackPointer--;
+						stack[stackPointer] += temp;
+						break;
+					case PRINT:
+						stackPointer--;
+						printf("%d\n", stack[stackPointer]);
+						programCounter++;
+						break;
+					default:
+						programCounter++;
+						break;	/* For now */
+				}
+			}
 			continue;
 		}
 	}
