@@ -1,15 +1,20 @@
 #include "main.h"
 
-void list(int16_t* program, uint16_t max) {
+void list(int16_t* program, uint16_t max, bool showAddresses) {
 	uint16_t i;
 	for (i=0; i<max; i++) {
+		if (showAddresses)
+			printf(" %d.", i);
 		switch(program[i]) {
 			case DONE:
 				printf(" DONE\n");
 				break;
 			case PUSH:
+				printf(" PUSH");
 				i++;
-				printf(" PUSH %d\n", program[i]);
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
 				break;
 			case POP:
 				printf(" POP\n");
@@ -19,18 +24,27 @@ void list(int16_t* program, uint16_t max) {
 				break;
 			case ADD:
 				i++;
-				printf(" ADD %d\n", program[i]);
+				printf(" ADD");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
 				break;
 			case JUMP:
 				i++;
-				printf(" JUMP %d\n", program[i]);
+				printf(" JUMP");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
 				break;
 			case PRINT:
 				printf(" PRINT\n");
 				break;
 			case IF_EQUAL:
 				i++;
-				printf(" IF_EQUAL %d\n", program[i]);
+				printf(" IF_EQUAL");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
 				break;
 		}
 	}
@@ -110,6 +124,7 @@ int main() {
 	memset(program, 0, 65536 * sizeof(int16_t));
 	
 	while(true) {
+		printf("🧀: ");
 		memset(buffer, 0, 80);
 		fgets(buffer, 80, stdin);
 		
@@ -154,15 +169,19 @@ int main() {
 			programCounter++;
 			continue;
 		}
-		if (STRING_STARTS_WITH(buffer, "IF_EQUAL")) {
+		if (STRING_STARTS_WITH(buffer, "IF_EQUAL ")) {
 			program[programCounter] = IF_EQUAL;
 			programCounter++;
-			program[programCounter] = atoi(buffer + 8);
+			program[programCounter] = atoi(buffer + 9);
 			programCounter++;
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "LIST")) {
-			list(program, programCounter);
+			list(program, programCounter, false);
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "DUMP")) {
+			list(program, programCounter, true);
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "RUN")) {
