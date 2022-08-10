@@ -86,7 +86,6 @@ void run(int16_t* program) {
 				programCounter = program[programCounter] - 1;
 				/* printf("Jumping to %d\n", programCounter + 1); */
 			}
-			stackPointer--;
 		}
 		else if (program[programCounter] == JUMP) {
 			programCounter++;
@@ -169,6 +168,18 @@ int main() {
 		if (STRING_STARTS_WITH(buffer, "RUN")) {
 			run(program);
 			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "NEW")) {
+			memset(program, 0, 65536 * sizeof(int16_t));
+			programCounter = 0;
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "SYS ")) {
+			system(buffer + 4);
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "EXIT")) {
+			break;
 		}
 	}
 	return 0;

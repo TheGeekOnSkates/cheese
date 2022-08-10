@@ -1,28 +1,30 @@
-# TO-DO'S
+# TO-DO'S FOR 1.0
 
-## On the "runner" side:
+* Fix the bug in LIST (maybe pass programCounter as a parameter)
+* Add some validation in the compile phase - I can just do "ADD" by itself
+* WTFM :)
+* Push to master and start playing with new features for 1.1
 
-* Finish IF_EQUAL - It works, but also moves the stack pointer - not sure if it should do that.
 
-## On the "compiler" side:
 
-* Add some validation - I can just do "ADD" by itself and it "compiles".
+## Thoughts about version 1.1
 
-## When both compiler and runner are finished:
-
-* Add a NEW instruction to clear the program counters/pointers/memory
-* Add a SYS instruction, so I can do i.e. SYS clear
-* Add a command-line option, a file (maybe use the extension ".kso", lol).  That wasy I can just do i.e. "cheese my-test.kso" as I keep tinkering.
-* Debating about using spaces (not just new lines) as a delimiter; Forth does that, after all.
-* Oh, and add some docs, just cuz :)
-
-## Premature thoughts about version 1.1
+Debating about using spaces (not just new lines) as a delimiter; Forth does that, after all.
 
 Once ADD is working, some easy additions (cheesy pun definitely intended) would be:
 
 * SUBTRACT
 * MULTIPLY
 * DIVIDE
+* REMAINDER (sorry Sparticus, Modulus lost the battle) :)
+Random thought: Should I use symbols for this?  Nah!  These will probably be "opcodes" in an assembly language (lol what's a "cheese assembler"? :D)
+
+I'm also trying to figure out exactly how I want this system to work.
+
+* In the SO post this project was inspired by, I think the guy was really trying to go by the strict definition of an "interpreter" - as in interactive.  You write it, and it runs.  No "compiling" stage.
+* On the other hand, if I add a "compiler", converting Assembly files to .kso files, the things I could create would kinda be stand-alone programs, like in my 6502-based creations.  I kinda like that, cuz then you don't have to know the "language" to run the games.
+* On the other hand, again, look at Forth - you can include a Forth file, it runs, and you don't need to know the language to use the end result.  Same goes for Python - how many Python-based apps do people run without knowing Python?  But then again Python is an interesting example; cuz then when the program is running, it has to handle both the interpreting and the running (vs. just run the darn thing).  Or maybe support both (again, Python and Forth support that).
+
 
 Also, Forth (which this language is starting to remind me more and more of) has some other features I think would be helpful:
 
