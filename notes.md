@@ -1,10 +1,10 @@
 # TO-DO'S FOR 1.0
 
-* Fix the bug in LIST (maybe pass programCounter as a parameter)
 * Add some validation in the compile phase - I can just do "ADD" by itself
 * WTFM :)
-* Push to master and start playing with new features for 1.1
-
+* Push to master
+* Post on GitHub
+* Play with ideas below for 1.1
 
 
 ## Thoughts about version 1.1
@@ -25,7 +25,6 @@ I'm also trying to figure out exactly how I want this system to work.
 * On the other hand, if I add a "compiler", converting Assembly files to .kso files, the things I could create would kinda be stand-alone programs, like in my 6502-based creations.  I kinda like that, cuz then you don't have to know the "language" to run the games.
 * On the other hand, again, look at Forth - you can include a Forth file, it runs, and you don't need to know the language to use the end result.  Same goes for Python - how many Python-based apps do people run without knowing Python?  But then again Python is an interesting example; cuz then when the program is running, it has to handle both the interpreting and the running (vs. just run the darn thing).  Or maybe support both (again, Python and Forth support that).
 
-
 Also, Forth (which this language is starting to remind me more and more of) has some other features I think would be helpful:
 
 * SWAP
@@ -42,7 +41,10 @@ Also, Forth (which this language is starting to remind me more and more of) has 
 Of course then we're bordering on something useful, so probably not gonna happen, but still cool to think about if it did... how about:
 
 * A way to send data to / read data from files
-* Maybe another set of instructions for sound?
+* Input!  How could I have forgotten that!  (Thank you, Johnny 5) :D
+* And while we're at it, what about printing strings?  Right now, Cheese can only print numbers.
+* While we're at it, what about floats?  Forth uses a lot of fixed-point (which really does make a lot of sense) but why make users math that hard? :D
+* Maybe another set of instructions for sound?  Reading joysticks?
 
 Might make for some cheesy games. :D
 

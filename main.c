@@ -1,37 +1,37 @@
 #include "main.h"
 
-void list(int16_t* program) {
-	uint16_t i = 0;
-	while(true) {
+void list(int16_t* program, uint16_t max) {
+	uint16_t i;
+	for (i=0; i<max; i++) {
 		switch(program[i]) {
 			case DONE:
 				printf(" DONE\n");
-				return;
+				break;
 			case PUSH:
 				i++;
 				printf(" PUSH %d\n", program[i]);
-				i++; break;
+				break;
 			case POP:
 				printf(" POP\n");
-				i++; break;
+				break;
 			case DUP:
 				printf(" DUP\n");
-				i++; break;
+				break;
 			case ADD:
 				i++;
 				printf(" ADD %d\n", program[i]);
-				i++; break;
+				break;
 			case JUMP:
 				i++;
 				printf(" JUMP %d\n", program[i]);
-				i++; break;
+				break;
 			case PRINT:
 				printf(" PRINT\n");
-				i++; break;
+				break;
 			case IF_EQUAL:
 				i++;
 				printf(" IF_EQUAL %d\n", program[i]);
-				i++; break;
+				break;
 		}
 	}
 
@@ -162,7 +162,7 @@ int main() {
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "LIST")) {
-			list(program);
+			list(program, programCounter);
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "RUN")) {
