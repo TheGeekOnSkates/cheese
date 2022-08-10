@@ -75,12 +75,20 @@ void run(int16_t* program) {
 			/* printf("sum = %d\n", stack[stackPointer]); */
 		}
 		else if (program[programCounter] == IF_EQUAL) {
+			if (stackPointer == 0) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
 			programCounter++;
 			if (stack[stackPointer] == 0)
-				programCounter = program[programCounter];
+				programCounter = program[programCounter] - 1;
+			stackPointer--;
 		}
 		else if (program[programCounter] == JUMP) {
-			printf("JUMP (TO-DO)");
+			programCounter++;
+			programCounter = program[programCounter] - 1; /* Because the loop adds 1 later */
+			stackPointer--;
+			/* printf("Jumping to %d\n", programCounter + 1); */
 		}
 		else if (program[programCounter] == PRINT) {
 			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
@@ -116,6 +124,11 @@ int main() {
 		}
 		if (STRING_STARTS_WITH(buffer, "DUP")) {
 			program[programCounter] = DUP;
+			programCounter++;
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "DONE")) {
+			program[programCounter] = DONE;
 			programCounter++;
 			continue;
 		}
