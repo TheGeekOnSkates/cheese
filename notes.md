@@ -1,10 +1,3 @@
-# TO-DO'S FOR 1.0
-
-* Add some validation in the compile phase - I can just do "ADD" by itself
-* Push to master
-* Post on GitHub
-* Play with ideas below for 1.1
-
 ## Thoughts about version 1.1
 
 Now that ADD is working, some easy additions (cheesy pun definitely intended) are:

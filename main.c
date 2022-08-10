@@ -1,5 +1,15 @@
 #include "main.h"
 
+bool atoi_would_work(char* line) {
+	/* Skip past spaces, if there are any */
+	while (line[0] == ' ') line++;
+	
+	/* Skip past a negative or positive sign, if there is one */
+	if (line[0] == '-' || line[0] == '+') line++;
+	
+	return line[0] >= '0' && line[0] <= '9';
+}
+
 void list(int16_t* program, uint16_t max, bool showAddresses) {
 	uint16_t i;
 	for (i=0; i<max; i++) {
@@ -68,6 +78,10 @@ void run(int16_t* program) {
 			stack[stackPointer] = program[programCounter];
 			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
 			stackPointer++;
+			if (stackPointer == 0) {
+				printf("STACK OVERFLOW\n");
+				return;
+			}
 		}
 		else if (program[programCounter] == POP) {
 			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
@@ -129,9 +143,17 @@ int main() {
 		fgets(buffer, 80, stdin);
 		
 		if (STRING_STARTS_WITH(buffer, "PUSH")) {
+			if (!atoi_would_work(buffer + 4)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
 			program[programCounter] = PUSH;
 			programCounter++;
-			program[programCounter] = atoi(buffer + 4);
+			if (programCounter == 0) {
+				printf("PROGRAM MAX REACHED\n");
+				continue;
+			}
+			program[programCounter] = atoi(buffer + 5);
 			programCounter++;
 			continue;
 		}
@@ -151,6 +173,10 @@ int main() {
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "JUMP")) {
+			if (!atoi_would_work(buffer + 4)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
 			program[programCounter] = JUMP;
 			programCounter++;
 			program[programCounter] = atoi(buffer + 4);
@@ -158,6 +184,10 @@ int main() {
 			continue;
 		}
 		if (STRING_STARTS_WITH(buffer, "ADD")) {
+			if (!atoi_would_work(buffer + 3)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
 			program[programCounter] = ADD;
 			programCounter++;
 			program[programCounter] = atoi(buffer + 3);
@@ -169,10 +199,14 @@ int main() {
 			programCounter++;
 			continue;
 		}
-		if (STRING_STARTS_WITH(buffer, "IF_EQUAL ")) {
+		if (STRING_STARTS_WITH(buffer, "IF_EQUAL")) {
+			if (!atoi_would_work(buffer + 8)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
 			program[programCounter] = IF_EQUAL;
 			programCounter++;
-			program[programCounter] = atoi(buffer + 9);
+			program[programCounter] = atoi(buffer + 8);
 			programCounter++;
 			continue;
 		}
