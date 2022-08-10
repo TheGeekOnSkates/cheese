@@ -2,16 +2,18 @@
 
 ## On the "runner" side:
 
-* Finish IF_EQUAL
+* Finish IF_EQUAL - It works, but also moves the stack pointer - not sure if it should do that.
 
 ## On the "compiler" side:
 
-* Add some validation - I can just do "PRINT" by itself and it "compiles".
+* Add some validation - I can just do "ADD" by itself and it "compiles".
 
 ## When both compiler and runner are finished:
 
 * Add a NEW instruction to clear the program counters/pointers/memory
+* Add a SYS instruction, so I can do i.e. SYS clear
 * Add a command-line option, a file (maybe use the extension ".kso", lol).  That wasy I can just do i.e. "cheese my-test.kso" as I keep tinkering.
+* Debating about using spaces (not just new lines) as a delimiter; Forth does that, after all.
 * Oh, and add some docs, just cuz :)
 
 ## Premature thoughts about version 1.1

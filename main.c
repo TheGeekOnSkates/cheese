@@ -80,8 +80,12 @@ void run(int16_t* program) {
 				return;
 			}
 			programCounter++;
-			if (stack[stackPointer] == 0)
+			stackPointer--;
+			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
+			if (stack[stackPointer] == 0) {
 				programCounter = program[programCounter] - 1;
+				/* printf("Jumping to %d\n", programCounter + 1); */
+			}
 			stackPointer--;
 		}
 		else if (program[programCounter] == JUMP) {
