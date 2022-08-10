@@ -124,7 +124,7 @@ int main() {
 	memset(program, 0, 65536 * sizeof(int16_t));
 	
 	while(true) {
-		printf("🧀: ");
+		printf("🧀");
 		memset(buffer, 0, 80);
 		fgets(buffer, 80, stdin);
 		
