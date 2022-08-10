@@ -44,22 +44,21 @@ void run(int16_t* program) {
 	
 	memset(stack, 0, 65536 * sizeof(int16_t));
 	while(true) {
-		printf("\nprogramCounter = %d, stackPointer = %d\n", programCounter, stackPointer);
+		/* printf("\nprogramCounter = %d, stackPointer = %d\n", programCounter, stackPointer); */
 		if (program[programCounter] == DONE) {
-			printf("Done.\n");
+			/* printf("Done.\n"); */
 			return;
 		}
 		if (program[programCounter] == PUSH) {
 			programCounter++;
 			stack[stackPointer] = program[programCounter];
-			printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]);
+			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
 			stackPointer++;
 		}
 		else if (program[programCounter] == POP) {
 			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
 			stack[stackPointer] = 0;
-			printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]);
-			/* What to do with program[programCounter]; ? */
+			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
 		}
 		else if (program[programCounter] == DUP) {
 			if (stackPointer == 0) {
@@ -71,10 +70,14 @@ void run(int16_t* program) {
 			stackPointer++;
 		}
 		else if (program[programCounter] == ADD) {
-			printf("ADD (TO-DO)");
+			programCounter++;
+			stack[stackPointer - 1] += program[programCounter];
+			/* printf("sum = %d\n", stack[stackPointer]); */
 		}
 		else if (program[programCounter] == IF_EQUAL) {
-			printf("IF_EQUAL (TO-DO)");
+			programCounter++;
+			if (stack[stackPointer] == 0)
+				programCounter = program[programCounter];
 		}
 		else if (program[programCounter] == JUMP) {
 			printf("JUMP (TO-DO)");

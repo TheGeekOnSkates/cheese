@@ -2,9 +2,8 @@
 
 ## On the "runner" side:
 
-* Do ADD
 * Do JUMP
-* Do IF_EQUAL
+* Finish IF_EQUAL
 
 ## On the "compiler" side:
 
