@@ -80,6 +80,18 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		*programCounter = pc;
 		return;
 	}
+	if (STRING_STARTS_WITH(line, "MOD")) {
+		if (!atoi_would_work(line + 3)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = MOD;
+		pc++;
+		program[pc] = atoi(line + 3);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
 	if (STRING_STARTS_WITH(line, "MUL")) {
 		if (!atoi_would_work(line + 3)) {
 			printf("NUMBER REQUIRED\n");

@@ -50,6 +50,14 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
+			case MOD:
+				i++;
+				printf(" MOD\n");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+				break;
 			case MUL:
 				i++;
 				printf(" MUL");

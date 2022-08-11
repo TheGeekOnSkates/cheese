@@ -1,8 +1,10 @@
 # TO-DO's before I REALLY release 1.0
 
-* Add a MOD (Modulus / remainder) instruction
+* Have SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
 * Test, test, and test some more, just cuz :)
-* Update the manual (also, don't forget to explain why there is a piece of cheese on their terminal :D ).
+* Update the manual
+	- Make sure to document which functions are not available except when RUNning
+	- Also, don't forget to explain why there is a piece of cheese on their terminal :D
 
 
 
@@ -13,12 +15,10 @@
 * REMAINDER (sorry Sparticus, Modulus lost the battle) :)
 * SWAP
 * ROTATE (sorry Forth, ROT is a word and using it doesn't make sense here :D)
-* A CLEAR instruction (rather than SYS clear)
-* Having SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
 * A command to print the contents of the stack (like .S in Forth)
 * POKE <address> - POP the top number on the stack to <address>
 * PEEK <address> - PUSH the number at <address> to the top of the stack
-
+* At first I wanted CLEAR, but now I'm kind of thinking maybe ESC (like in my basic); this way it wouldn't require ncurses or knowledge of every single terminal out there lol; I'd like to keep this in standard C as much as possible).
 * BNE and BEQ (like 6502 Assembly, where you "branch" by a relative number - like instead of:
 	PUSH 1 [addresses 0-1]
 	JNE 5 [addresses 2-3]

@@ -68,6 +68,11 @@ void run(int16_t* program) {
 			stackPointer--;
 			/* printf("Jumping to %d\n", programCounter + 1); */
 		}
+		else if (program[programCounter] == MOD) {
+			programCounter++;
+			stack[stackPointer - 1] %= program[programCounter];
+			/* printf("sum = %d\n", stack[stackPointer]); */
+		}
 		else if (program[programCounter] == MUL) {
 			programCounter++;
 			stack[stackPointer - 1] *= program[programCounter];
