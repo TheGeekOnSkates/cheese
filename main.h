@@ -17,17 +17,19 @@
 
 enum Instructions {
 	DONE,		/* End of program */
-	PUSH,		/* push a number on to the stack */
-	POP,		/* pop off the first number on the stack */
+	PUSH,		/* Put a new number on top of the stack */
+	POP,		/* Remove the number at the top of the stack */
+	DUP,		/* Push a copy ("DUPlicate") of what's at the top of the stack back on top */
 	ADD,		/* Add a number to the top number on the stack, and put the result on the stack */
 	SUB,		/* Subtract a number from the top number on the stack, and put the result on the stack */
 	MUL,		/* Multiply a number by the top number on the stack, and put the result on the stack */
 	DIV,		/* Divide a number by the top number on the stack, and put the result on the stack */
+	MOD,		/* Same as DIV except it puts the remainder ("Modulus" to my Ancient Roman friends) on the top of the stack */
 	JUMP,		/* Jump to a memory address */
 	JEQ,		/* Jump to <address> if the number at the top of the stack == 0 */
 	JNE,		/* Jump to <address> if the number at the top of the stack != 0 */
-	PRINT,		/* print the value at the top of the stack */
-	DUP		/* push a copy of what's at the top of the stack back onto the stack */
+	PRINT,		/* Print the number at the top of the stack */
+	ASC		/* Print the ASCII character (well, probably Unicode) represented by the number at the top of the stack */
 };
 
 
@@ -88,5 +90,15 @@ void list(int16_t* program, uint16_t max, bool showAddresses);
  * @param[in] The compiled program
  */
 void run(int16_t* program);
+
+/**
+ * Assembles a single line of code
+ * @param[in] The code to be assembled
+ * @param[in] The program memory
+ * @param[in, out] Where to put the compiled code
+ */
+void assemble_line(char* line, int16_t* program, uint16_t *programCounter);
+
+
 
 #endif

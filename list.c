@@ -6,22 +6,6 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 		if (showAddresses)
 			printf(" %d.", i);
 		switch(program[i]) {
-			case DONE:
-				printf(" DONE\n");
-				break;
-			case PUSH:
-				printf(" PUSH");
-				i++;
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
-				break;
-			case POP:
-				printf(" POP\n");
-				break;
-			case DUP:
-				printf(" DUP\n");
-				break;
 			case ADD:
 				i++;
 				printf(" ADD");
@@ -29,19 +13,8 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
-			case SUB:
-				i++;
-				printf(" SUB");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
-				break;
-			case MUL:
-				i++;
-				printf(" MUL");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+			case ASC:
+				printf(" ASC\n");
 				break;
 			case DIV:
 				i++;
@@ -50,15 +23,11 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
-			case JUMP:
-				i++;
-				printf(" JUMP");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+			case DONE:
+				printf(" DONE\n");
 				break;
-			case PRINT:
-				printf(" PRINT\n");
+			case DUP:
+				printf(" DUP\n");
 				break;
 			case JEQ:
 				i++;
@@ -70,6 +39,40 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 			case JNE:
 				i++;
 				printf(" JNE");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case JUMP:
+				i++;
+				printf(" JUMP");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case MUL:
+				i++;
+				printf(" MUL");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case POP:
+				printf(" POP\n");
+				break;
+			case PRINT:
+				printf(" PRINT\n");
+				break;
+			case PUSH:
+				printf(" PUSH");
+				i++;
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case SUB:
+				i++;
+				printf(" SUB");
 				if (showAddresses)
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);

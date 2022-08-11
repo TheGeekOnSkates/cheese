@@ -1,19 +1,6 @@
-## Whoa!  More features?
-
-I figured, why not?  We're calling this a 1.0, why not do one more night's worth of fun tinkering before dropping this cheesy project on my friends?!  :)
-
-Okay seriously, there are a few things I had noticed about my previous commit:
-
-1. What I ended up with was not exactly what that SO post suggested (like that person wanted ADD to add the top 2 numbers on the stack, like Forth).  I could do that, but I'm not building a Forth.  I'm making CHEESE! :D
-2. The other math functions are so, SO easy to implement that it was not a big deal to add.
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 # TO-DO's before I REALLY release 1.0
 
 * Add a MOD (Modulus / remainder) instruction
-* Add an assemble_line function (remove a bunch of logic from main() - I'll be using main() for other stuff later)
-* Organize list, run, and assemble_line alphabetically by instruction (currently done by unwritten categories like math functions, jumping functions etc.)
 * Test, test, and test some more, just cuz :)
 * Update the manual (also, don't forget to explain why there is a piece of cheese on their terminal :D ).
 
