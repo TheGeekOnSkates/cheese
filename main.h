@@ -19,12 +19,17 @@ enum Instructions {
 	DONE,		/* End of program */
 	PUSH,		/* push a number on to the stack */
 	POP,		/* pop off the first number on the stack */
-	ADD,		/* pop off the top 2 items on the stack and push their sum on to the stack */
-	IF_EQUAL,	/* look at the top of the stack, if it's 0, continue, else, jump to <address> where <address> is a line number */
-	JUMP,		/* jump to a line number */
+	ADD,		/* Add a number to the top number on the stack, and put the result on the stack */
+	SUB,		/* Subtract a number from the top number on the stack, and put the result on the stack */
+	MUL,		/* Multiply a number by the top number on the stack, and put the result on the stack */
+	DIV,		/* Divide a number by the top number on the stack, and put the result on the stack */
+	JUMP,		/* Jump to a memory address */
+	JEQ,		/* Jump to <address> if the number at the top of the stack == 0 */
+	JNE,		/* Jump to <address> if the number at the top of the stack != 0 */
 	PRINT,		/* print the value at the top of the stack */
 	DUP		/* push a copy of what's at the top of the stack back onto the stack */
 };
+
 
 
 /************************************************************************/
@@ -55,5 +60,33 @@ enum Instructions {
  */
 #define STRING_CONTAINS(a, b) (strstr(a, b) != NULL)
 
+
+
+/************************************************************************/
+/**** FUNCTIONS (each one defined in its own .c file for now)        ****/
+/************************************************************************/
+
+/**
+ * Checks if the string starts with a number
+ * @param[in] The string to be tested
+ * @returns True if atoi() would (or at least should) work, false if not
+ */
+bool atoi_would_work(char* line);
+
+/**
+ * Lists the current program (similar to BASICs)
+ * @param[in] A compiled Cheese program
+ * @param[in] The program counter / size of the program
+ * @param[in] If true, print the memory addresses (position in the array)
+ * for debugging.  If false, what you get is more like disassembly, where you
+ * get code that could be copied/pasted and run again.
+ */
+void list(int16_t* program, uint16_t max, bool showAddresses);
+
+/**
+ * Runs the current program
+ * @param[in] The compiled program
+ */
+void run(int16_t* program);
 
 #endif

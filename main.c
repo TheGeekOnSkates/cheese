@@ -1,147 +1,24 @@
 #include "main.h"
 
-bool atoi_would_work(char* line) {
-	/* Skip past spaces, if there are any */
-	while (line[0] == ' ') line++;
-	
-	/* Skip past a negative or positive sign, if there is one */
-	if (line[0] == '-' || line[0] == '+') line++;
-	
-	return line[0] >= '0' && line[0] <= '9';
-}
-
-void list(int16_t* program, uint16_t max, bool showAddresses) {
-	uint16_t i;
-	for (i=0; i<max; i++) {
-		if (showAddresses)
-			printf(" %d.", i);
-		switch(program[i]) {
-			case DONE:
-				printf(" DONE\n");
-				break;
-			case PUSH:
-				printf(" PUSH");
-				i++;
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
-				break;
-			case POP:
-				printf(" POP\n");
-				break;
-			case DUP:
-				printf(" DUP\n");
-				break;
-			case ADD:
-				i++;
-				printf(" ADD");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
-				break;
-			case JUMP:
-				i++;
-				printf(" JUMP");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
-				break;
-			case PRINT:
-				printf(" PRINT\n");
-				break;
-			case IF_EQUAL:
-				i++;
-				printf(" IF_EQUAL");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
-				break;
-		}
-	}
-
-}
-
-void run(int16_t* program) {
-	int16_t stack[65536];
-	uint16_t programCounter = 0,
-		stackPointer = 0;
-	
-	memset(stack, 0, 65536 * sizeof(int16_t));
-	while(true) {
-		/* printf("\nprogramCounter = %d, stackPointer = %d\n", programCounter, stackPointer); */
-		if (program[programCounter] == DONE) {
-			/* printf("Done.\n"); */
-			return;
-		}
-		if (program[programCounter] == PUSH) {
-			programCounter++;
-			stack[stackPointer] = program[programCounter];
-			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
-			stackPointer++;
-			if (stackPointer == 0) {
-				printf("STACK OVERFLOW\n");
-				return;
-			}
-		}
-		else if (program[programCounter] == POP) {
-			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
-			stack[stackPointer] = 0;
-			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
-		}
-		else if (program[programCounter] == DUP) {
-			if (stackPointer == 0) {
-				printf("STACK UNDERFLOW\n");
-				return;
-			}
-			stack[stackPointer] = stack[stackPointer - 1];
-			printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]);
-			stackPointer++;
-		}
-		else if (program[programCounter] == ADD) {
-			programCounter++;
-			stack[stackPointer - 1] += program[programCounter];
-			/* printf("sum = %d\n", stack[stackPointer]); */
-		}
-		else if (program[programCounter] == IF_EQUAL) {
-			if (stackPointer == 0) {
-				printf("STACK UNDERFLOW\n");
-				return;
-			}
-			programCounter++;
-			stackPointer--;
-			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
-			if (stack[stackPointer] == 0) {
-				programCounter = program[programCounter] - 1;
-				/* printf("Jumping to %d\n", programCounter + 1); */
-			}
-		}
-		else if (program[programCounter] == JUMP) {
-			programCounter++;
-			programCounter = program[programCounter] - 1; /* Because the loop adds 1 later */
-			stackPointer--;
-			/* printf("Jumping to %d\n", programCounter + 1); */
-		}
-		else if (program[programCounter] == PRINT) {
-			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
-			printf("%d\n", stack[stackPointer]);
-			stack[stackPointer] = 0;
-		}
-		programCounter++;
-	}
-}
-
 int main() {
+	/* Declare variables */
 	char buffer[80];
 	uint16_t programCounter = 0;
 	int16_t program[65536];
 	
+	/* Clear the program memory */
 	memset(program, 0, 65536 * sizeof(int16_t));
 	
+	/* Main event loop */
 	while(true) {
+		
+		/* Get the user's input (I love that prompt, lol) */
 		printf("🧀");
 		memset(buffer, 0, 80);
 		fgets(buffer, 80, stdin);
 		
+		/* And do the actual interpreting.
+		Eventually, I'd like to put all this in a function too. */
 		if (STRING_STARTS_WITH(buffer, "PUSH")) {
 			if (!atoi_would_work(buffer + 4)) {
 				printf("NUMBER REQUIRED\n");
@@ -194,19 +71,63 @@ int main() {
 			programCounter++;
 			continue;
 		}
+		if (STRING_STARTS_WITH(buffer, "SUB")) {
+			if (!atoi_would_work(buffer + 3)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
+			program[programCounter] = SUB;
+			programCounter++;
+			program[programCounter] = atoi(buffer + 3);
+			programCounter++;
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "MUL")) {
+			if (!atoi_would_work(buffer + 3)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
+			program[programCounter] = MUL;
+			programCounter++;
+			program[programCounter] = atoi(buffer + 3);
+			programCounter++;
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "DIV")) {
+			if (!atoi_would_work(buffer + 3)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
+			program[programCounter] = DIV;
+			programCounter++;
+			program[programCounter] = atoi(buffer + 3);
+			programCounter++;
+			continue;
+		}
 		if (STRING_STARTS_WITH(buffer, "PRINT")) {
 			program[programCounter] = PRINT;
 			programCounter++;
 			continue;
 		}
-		if (STRING_STARTS_WITH(buffer, "IF_EQUAL")) {
-			if (!atoi_would_work(buffer + 8)) {
+		if (STRING_STARTS_WITH(buffer, "JEQ")) {
+			if (!atoi_would_work(buffer + 3)) {
 				printf("NUMBER REQUIRED\n");
 				continue;
 			}
-			program[programCounter] = IF_EQUAL;
+			program[programCounter] = JEQ;
 			programCounter++;
-			program[programCounter] = atoi(buffer + 8);
+			program[programCounter] = atoi(buffer + 3);
+			programCounter++;
+			continue;
+		}
+		if (STRING_STARTS_WITH(buffer, "JNE")) {
+			if (!atoi_would_work(buffer + 3)) {
+				printf("NUMBER REQUIRED\n");
+				continue;
+			}
+			program[programCounter] = JNE;
+			programCounter++;
+			program[programCounter] = atoi(buffer + 3);
 			programCounter++;
 			continue;
 		}

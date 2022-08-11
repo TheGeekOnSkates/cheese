@@ -1,63 +1,64 @@
-## Thoughts about version 1.1
+## Whoa!  More features?
 
-Now that ADD is working, some easy additions (cheesy pun definitely intended) are:
+I figured, why not?  We're calling this a 1.0, why not do one more night's worth of fun tinkering before dropping this cheesy project on my friends?!  :)
 
-* SUBTRACT
-* MULTIPLY
-* DIVIDE
+Okay seriously, there are a few things I had noticed about my previous commit:
+
+1. What I ended up with was not exactly what that SO post suggested (like that person wanted ADD to add the top 2 numbers on the stack, like Forth).  I could do that, but I'm not building a Forth.  I'm making CHEESE! :D
+2. The other math functions are so, SO easy to implement that it was not a big deal to add.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# TO-DO's before I REALLY release 1.0
+
+* Add a MOD (Modulus / remainder) instruction
+* Add an assemble_line function (remove a bunch of logic from main() - I'll be using main() for other stuff later)
+* Organize list, run, and assemble_line alphabetically by instruction (currently done by unwritten categories like math functions, jumping functions etc.)
+* Test, test, and test some more, just cuz :)
+* Update the manual (also, don't forget to explain why there is a piece of cheese on their terminal :D ).
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Features for future 1.x releases
+
 * REMAINDER (sorry Sparticus, Modulus lost the battle) :)
-
-Other, not-as-easy but just-as-useful instructions would be:
-
 * SWAP
-* ROTATE
-
-## Thoughts about version 1.2
-
-* Cheese would also benefit from:
-
+* ROTATE (sorry Forth, ROT is a word and using it doesn't make sense here :D)
 * A CLEAR instruction (rather than SYS clear)
 * Having SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
 * A command to print the contents of the stack (like .S in Forth)
+* POKE <address> - POP the top number on the stack to <address>
+* PEEK <address> - PUSH the number at <address> to the top of the stack
 
-## Thoughts about version 1.3
-
-A way to edit specific blocks of memory.  Like let's say I have:
-	PUSH 7
-	IF_EQUAL 100
-And I want to change that 7 to a zero.  It would be nice to just do:
-	1 [the memory address] 0 [the new value]
-Or maybe I want to change the IF_EQUAL to a JUMP; I could do:
-	2 [meaning the address] JUMP [the new value]
-
-But what if I could go further than that?  What if I did:
-
-EDIT 0-2
-
-0: You type in some text or leave blank to keep as-is
-1: Same as 0
-2: Same as 1
+* BNE and BEQ (like 6502 Assembly, where you "branch" by a relative number - like instead of:
+	PUSH 1 [addresses 0-1]
+	JNE 5 [addresses 2-3]
+	DONE [address 4, which gets skipped]
+  I could just do this:
+	PUSH 1 [addresses 0-1, not changed]
+	BNE 2 [If top of stack == 0, move forward 2 blocks _from here_]
 
 
+## Random thoughts about version 2.0
 
-## Premature thoughts about version 2.0
-
-I think 2.0 is where this program becomes more like a virtual machine.  And I guess "virtual machine" is the right term for what I like to build - "emulators of computers that never existed" is too wordy (lol).  But okay seriously, what I mean is:
+I think 2.0 is where this program becomes more like just an interpreter.  What I mean is:
 
 1. One program (or command-line option) to compile Cheese assembly into .kso files (LOL can't type this with a straight face!)
 2. Another program / option to disassemble .kso files
 3. The main program might be something like Python, Forth, or Node - either an interactive thing for one-liners or a program to run code files.
 
+Apart from that, there'll probably be a bunch of other features that wouldn't make sense now:
 
-## Pipe dreaming beyond 2.0
-
-* Not to mention, variables.  Forth has "words" which are awesome and fun and different, but I'm kind of thinking simpler: I can run LET CHEDDAR = 42 and the program will replace all occurrences of CHEDDAR with 42 when compiling.
-* It would be nice to have an array that points to screen coordinates.  Like let's say I do:
-	PUSH 67		// Meaning the letter C
-	SCREEN 0 0	// Put a C at 0, 0 on the screen
-* Oh yeah, and comments would be nice too
+* Comments
+* INCLUDE "file.asm"
+* Variables.  Forth has "words" which are awesome and fun and different, but I'm kind of thinking simpler: I can run LET CHEDDAR = 42 and the program will replace all occurrences of CHEDDAR with 42 when compiling.
+* Labels, like other assemblers have.
 
 Of course then we're bordering on something useful, so probably not gonna happen, but still cool to think about if it did... how about:
+
+## Pipe dreaming beyond 2.0
 
 * A way to send data to / read data from files
 * Input!  How could I have forgotten that!  (Thank you, Johnny 5) :D
@@ -67,41 +68,18 @@ Of course then we're bordering on something useful, so probably not gonna happen
 
 Might make for some cheesy games. :D
 
-----------------------------------------------------
 
-# Misc. notes and random ramblings
 
-For JUMP, I was able to test it (and get it working) with this program:
-	JUMP 3
-	DONE
-	PUSH 7
-	PRINT
-If you look at this program, the memory is:
-	[0] JUMP
-	[1] 3
-	[2] DONE
-	[3] PUSH
-	[4] 7
-	[5] PRINT
-So my program sees "JUMP 3" and skips over position 2.
 
-Now for IF_EQUAL, how about...
-	PUSH 5
-	ADD -5
-	IF_EQUAL 7
-	DONE
-	PUSH 42
-	PRINT
-Again, let's look at this:
-	[0] PUSH
-	[1] 5
-	[2] ADD
-	[3] -5
-	[4] IF_EQUAL
-	[5] 7
-	[6] DONE
-	[7] PUSH 42
-	[8] PRINT
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Misc. notes
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Random ramblings
 
 Interesting thought: This program, if I replaced all the 16-bit numbers with 8-bit numbers, could work really well on an 8-bit system.  It might be fun to try compiling for the C64, or even the Geek-Rig.
 
