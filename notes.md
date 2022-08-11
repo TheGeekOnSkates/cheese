@@ -1,6 +1,7 @@
 # TO-DO's before I REALLY release 1.0
 
 * Add BEQ and BNE
+* Add STACK (like .S in Forth - print the current stack)
 * I think I may need to re-think my math instructions.  There is currently no way to add/sub/mul/div/mod the top 2 numbers on the stack.  A few ideas here:
 	- I could do like the original SO post said, let ADD be a stand-alone thing that does that.  But IMO that's a bit too wanna-be Forth for me; what I'm shooting for here is a bit more like an Assembly language.
 	- Maybe turn i.e. ADD into ADD # (where to do it without the # is add <value at address>); oh wait, that's unrelated.  I kinda like it though!
@@ -19,17 +20,7 @@
 * REMAINDER (sorry Sparticus, Modulus lost the battle) :)
 * SWAP
 * ROTATE (sorry Forth, ROT is a word and using it doesn't make sense here :D)
-* A command to print the contents of the stack (like .S in Forth)
-* POKE <address> - POP the top number on the stack to <address>
-* PEEK <address> - PUSH the number at <address> to the top of the stack
 * At first I wanted CLEAR, but now I'm kind of thinking maybe ESC (like in my basic); this way it wouldn't require ncurses or knowledge of every single terminal out there lol; I'd like to keep this in standard C as much as possible).
-* BNE and BEQ (like 6502 Assembly, where you "branch" by a relative number - like instead of:
-	PUSH 1 [addresses 0-1]
-	JNE 5 [addresses 2-3]
-	DONE [address 4, which gets skipped]
-  I could just do this:
-	PUSH 1 [addresses 0-1, not changed]
-	BNE 2 [If top of stack == 0, move forward 2 blocks _from here_]
 * Have SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
 	Unfortunately, this turned out to be tougher than it looks.  Why?  Because I haven't come up with a way for Cheese to handle strings yet. :D
 
