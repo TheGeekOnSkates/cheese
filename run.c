@@ -86,6 +86,22 @@ void run(int16_t* program) {
 		else if (program[programCounter] == PRINT) {
 			printf("%d\n", stack[stackPointer - 1]);
 		}
+		else if (program[programCounter] == PEEK) {
+			programCounter++;
+			stack[stackPointer] = program[program[programCounter]];
+			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
+			stackPointer++;
+			if (stackPointer == 0) {
+				printf("STACK OVERFLOW\n");
+				return;
+			}
+		}
+		else if (program[programCounter] == POKE) {
+			programCounter++;
+			program[program[programCounter]] = stack[stackPointer - 1];
+			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
+			stack[stackPointer] = 0;
+		}
 		else if (program[programCounter] == PUSH) {
 			programCounter++;
 			stack[stackPointer] = program[programCounter];

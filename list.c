@@ -65,6 +65,20 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
+			case PEEK:
+				printf(" PEEK");
+				i++;
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case POKE:
+				printf(" POKE");
+				i++;
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
 			case POP:
 				printf(" POP\n");
 				break;

@@ -104,6 +104,38 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		*programCounter = pc;
 		return;
 	}
+	if (STRING_STARTS_WITH(line, "PEEK")) {
+		if (!atoi_would_work(line + 4)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = PEEK;
+		pc++;
+		if (pc == 0) {
+			printf("PROGRAM MAX REACHED\n");
+			return;
+		}
+		program[pc] = atoi(line + 4);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "POKE")) {
+		if (!atoi_would_work(line + 4)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = POKE;
+		pc++;
+		if (pc == 0) {
+			printf("PROGRAM MAX REACHED\n");
+			return;
+		}
+		program[pc] = atoi(line + 4);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
 	if (STRING_STARTS_WITH(line, "POP")) {
 		program[pc] = POP;
 		pc++;

@@ -1,6 +1,10 @@
 # TO-DO's before I REALLY release 1.0
 
-* Have SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
+* Add BEQ and BNE
+* I think I may need to re-think my math instructions.  There is currently no way to add/sub/mul/div/mod the top 2 numbers on the stack.  A few ideas here:
+	- I could do like the original SO post said, let ADD be a stand-alone thing that does that.  But IMO that's a bit too wanna-be Forth for me; what I'm shooting for here is a bit more like an Assembly language.
+	- Maybe turn i.e. ADD into ADD # (where to do it without the # is add <value at address>); oh wait, that's unrelated.  I kinda like it though!
+	- If I could do that, maybe I could do like AFS (add from stack), SFS (subtract from stack) etc.  Lousy shorthand, but it would definitely solve the problem! :)
 * Test, test, and test some more, just cuz :)
 * Update the manual
 	- Make sure to document which functions are not available except when RUNning
@@ -26,7 +30,8 @@
   I could just do this:
 	PUSH 1 [addresses 0-1, not changed]
 	BNE 2 [If top of stack == 0, move forward 2 blocks _from here_]
-
+* Have SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
+	Unfortunately, this turned out to be tougher than it looks.  Why?  Because I haven't come up with a way for Cheese to handle strings yet. :D
 
 ## Random thoughts about version 2.0
 

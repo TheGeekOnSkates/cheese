@@ -26,10 +26,14 @@ enum Instructions {
 	DIV,		/* Divide a number by the top number on the stack, and put the result on the stack */
 	MOD,		/* Same as DIV except it puts the remainder ("Modulus" to my Ancient Roman friends) on the top of the stack */
 	JUMP,		/* Jump to a memory address */
-	JEQ,		/* Jump to <address> if the number at the top of the stack == 0 */
-	JNE,		/* Jump to <address> if the number at the top of the stack != 0 */
+	JNE,		/* Jump TO <address> if the number at the top of the stack != 0 */
+	JEQ,		/* Jump TO <address> if the number at the top of the stack == 0 */
+	BNE,		/* Jump BY <address> if the number at the top of the stack != 0 */
+	BEQ,		/* Jump BY <address> if the number at the top of the stack == 0 */
 	PRINT,		/* Print the number at the top of the stack */
-	ASC		/* Print the ASCII character (well, probably Unicode) represented by the number at the top of the stack */
+	ASC,		/* Print the ASCII character (well, probably Unicode) represented by the number at the top of the stack */
+	PEEK,		/* PUSH the number at <address> to the top of the stack */
+	POKE		/* POP the number at the top of the stack to <address> */
 };
 
 
