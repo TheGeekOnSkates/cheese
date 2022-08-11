@@ -1,6 +1,5 @@
 # TO-DO's before I REALLY release 1.0
 
-* Add BEQ and BNE
 * Add AFS (add from stack), SFS (subtract from stack) etc.
 * Set up my current ADD to be ADD #, SUB to be SUB # etc. in assemble_line
 * Re-add ADD/SUB/MUL/DIV/MOD to do those math things on memory addresses (kind of like how in 6502 you can do LDA #$FF [literal] or LDA $FF [address])

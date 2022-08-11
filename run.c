@@ -17,6 +17,30 @@ void run(int16_t* program) {
 		else if (program[programCounter] == ASC) {
 			printf("%lc", stack[stackPointer - 1]);
 		}
+		else if (program[programCounter] == BEQ) {
+			if (stackPointer == 0) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			programCounter++;
+			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
+			if (stack[stackPointer - 1] == 0) {
+				programCounter += program[programCounter] - 1;
+				/* printf("Branching to %d\n", programCounter + 1); */
+			}
+		}
+		else if (program[programCounter] == BNE) {
+			if (stackPointer == 0) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			programCounter++;
+			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
+			if (stack[stackPointer - 1] != 0) {
+				programCounter += program[programCounter] - 1;
+				/* printf("Branching to %d\n", programCounter + 1); */
+			}
+		}
 		else if (program[programCounter] == DIV) {
 			if (stack[stackPointer - 1] == 0) {
 				printf("CAN'T DIVIDE BY ZERO.\n");

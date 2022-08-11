@@ -16,6 +16,20 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 			case ASC:
 				printf(" ASC\n");
 				break;
+			case BEQ:
+				i++;
+				printf(" BEQ");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case BNE:
+				i++;
+				printf(" BNE");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
 			case DIV:
 				i++;
 				printf(" DIV");
