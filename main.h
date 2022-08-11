@@ -33,7 +33,8 @@ enum Instructions {
 	PRINT,		/* Print the number at the top of the stack */
 	ASC,		/* Print the ASCII character (well, probably Unicode) represented by the number at the top of the stack */
 	PEEK,		/* PUSH the number at <address> to the top of the stack */
-	POKE		/* POP the number at the top of the stack to <address> */
+	POKE,		/* POP the number at the top of the stack to <address> */
+	STACK		/* Print the contents of the stack */
 };
 
 

@@ -1,14 +1,14 @@
 # TO-DO's before I REALLY release 1.0
 
 * Add BEQ and BNE
-* Add STACK (like .S in Forth - print the current stack)
-* I think I may need to re-think my math instructions.  There is currently no way to add/sub/mul/div/mod the top 2 numbers on the stack.  A few ideas here:
-	- I could do like the original SO post said, let ADD be a stand-alone thing that does that.  But IMO that's a bit too wanna-be Forth for me; what I'm shooting for here is a bit more like an Assembly language.
-	- Maybe turn i.e. ADD into ADD # (where to do it without the # is add <value at address>); oh wait, that's unrelated.  I kinda like it though!
-	- If I could do that, maybe I could do like AFS (add from stack), SFS (subtract from stack) etc.  Lousy shorthand, but it would definitely solve the problem! :)
-* Test, test, and test some more, just cuz :)
+* Add AFS (add from stack), SFS (subtract from stack) etc.
+* Set up my current ADD to be ADD #, SUB to be SUB # etc. in assemble_line
+* Re-add ADD/SUB/MUL/DIV/MOD to do those math things on memory addresses (kind of like how in 6502 you can do LDA #$FF [literal] or LDA $FF [address])
+* I have an idea for how to handle strings: Write a function that returns a char*, by reading memory untill it hits a zero (like a C-style NULL terminator).
+* If I do that (and that might wait for 1.1), then rework SYS to be like other functions
+* Test, test, and test some more (play with it), just cuz :)
 * Update the manual
-	- Make sure to document which functions are not available except when RUNning
+	- Make sure to document which instructions are not available except when RUNning (maybe call it "direct mode" and "program mode" like BASIC)
 	- Also, don't forget to explain why there is a piece of cheese on their terminal :D
 
 

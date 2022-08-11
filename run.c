@@ -3,7 +3,8 @@
 void run(int16_t* program) {
 	int16_t stack[65536];
 	uint16_t programCounter = 0,
-		stackPointer = 0;
+		stackPointer = 0,
+		i = 0;
 	
 	memset(stack, 0, 65536 * sizeof(int16_t));
 	while(true) {
@@ -111,6 +112,12 @@ void run(int16_t* program) {
 				printf("STACK OVERFLOW\n");
 				return;
 			}
+		}
+		else if (program[programCounter] == STACK) {
+			printf("Stack size: %d\n", stackPointer);
+			for (i=0; i<stackPointer; i++)
+				printf("%d ", stack[i]);
+			printf("\n");
 		}
 		else if (program[programCounter] == SUB) {
 			programCounter++;

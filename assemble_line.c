@@ -176,4 +176,10 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		*programCounter = pc;
 		return;
 	}
+	if (STRING_STARTS_WITH(line, "STACK")) {
+		program[pc] = STACK;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
 }
