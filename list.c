@@ -1,176 +1,176 @@
 #include "main.h"
 
-void list(int16_t* program, uint16_t max, bool showAddresses) {
+void list(int16_t* program, uint16_t max, FILE* file, bool showAddresses) {
 	uint16_t i;
 	for (i=0; i<max; i++) {
 		if (showAddresses)
-			printf(" %d.", i);
+			fprintf(file, " %d.", i);
 		switch(program[i]) {
 			case ADD:
 				i++;
-				printf(" ADD #");
+				fprintf(file, " ADD #");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case ADD_RAM:
 				i++;
-				printf(" ADD");
+				fprintf(file, " ADD");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case AFS:
-				printf(" AFS");
+				fprintf(file, " AFS");
 				break;
 			case ASC:
-				printf(" ASC\n");
+				fprintf(file, " ASC\n");
 				break;
 			case BEQ:
 				i++;
-				printf(" BEQ");
+				fprintf(file, " BEQ");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case BNE:
 				i++;
-				printf(" BNE");
+				fprintf(file, " BNE");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case DFS:
-				printf(" DFS");
+				fprintf(file, " DFS");
 				break;
 			case DIV:
 				i++;
-				printf(" DIV #");
+				fprintf(file, " DIV #");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case DIV_RAM:
 				i++;
-				printf(" DIV");
+				fprintf(file, " DIV");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case DONE:
-				printf(" DONE\n");
+				fprintf(file, " DONE\n");
 				break;
 			case DUP:
-				printf(" DUP\n");
+				fprintf(file, " DUP\n");
 				break;
 			case JEQ:
 				i++;
-				printf(" JEQ");
+				fprintf(file, " JEQ");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case JNE:
 				i++;
-				printf(" JNE");
+				fprintf(file, " JNE");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case JUMP:
 				i++;
-				printf(" JUMP");
+				fprintf(file, " JUMP");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case MFS:
-				printf(" MFS");
+				fprintf(file, " MFS");
 				break;
 			case MOD:
 				i++;
-				printf(" MOD #\n");
+				fprintf(file, " MOD #\n");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case MOD_RAM:
 				i++;
-				printf(" MOD\n");
+				fprintf(file, " MOD\n");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case MUL:
 				i++;
-				printf(" MUL #");
+				fprintf(file, " MUL #");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case MUL_RAM:
 				i++;
-				printf(" MUL");
+				fprintf(file, " MUL");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case PEEK:
-				printf(" PEEK");
+				fprintf(file, " PEEK");
 				i++;
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case POKE:
-				printf(" POKE");
+				fprintf(file, " POKE");
 				i++;
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case POP:
-				printf(" POP\n");
+				fprintf(file, " POP\n");
 				break;
 			case PRINT:
-				printf(" PRINT\n");
+				fprintf(file, " PRINT\n");
 				break;
 			case PUSH:
-				printf(" PUSH");
+				fprintf(file, " PUSH");
 				i++;
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case RFS:
-				printf(" RFS");
+				fprintf(file, " RFS");
 				break;
 			case SFS:
-				printf(" SFS");
+				fprintf(file, " SFS");
 				break;
 			case SUB:
 				i++;
-				printf(" SUB #");
+				fprintf(file, " SUB #");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case SUB_RAM:
 				i++;
-				printf(" SUB");
+				fprintf(file, " SUB");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 			case STACK:
-				printf(" STACK\n");
+				fprintf(file, " STACK\n");
 				break;
 			case SYS:
 				i++;
-				printf(" SYS");
+				fprintf(file, " SYS");
 				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
+					fprintf(file, "\n %d.", i);
+				fprintf(file, " %d\n", program[i]);
 				break;
 		}
 	}

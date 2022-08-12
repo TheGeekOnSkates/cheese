@@ -17,14 +17,16 @@ int main(int argc, const char** argv) {
 		}
 		else if (strcmp(argv[1], "unpack") == 0) {
 			if (argc == 4)
-				disassemble_file(argv[2], argv[3]);
+				disassemble_file(argv[2], argv[3], false);
 			else if (argc == 3)
-				disassemble_file(argv[2], "STDOUT");
+				disassemble_file(argv[2], "STDOUT", false);
 			else please();
 		}
 		else if (strcmp(argv[1], "shred") == 0) {
-			if (argc == 3)
-				shred_file(argv[2]);
+			if (argc == 4)
+				disassemble_file(argv[2], argv[3], true);
+			else if (argc == 3)
+				disassemble_file(argv[2], "STDOUT", true);
 			else please();
 		}
 		else if (strcmp(argv[1], "please") == 0) {
@@ -50,9 +52,9 @@ int main(int argc, const char** argv) {
 		
 		/* And do the actual interpreting. */
 		if (STRING_STARTS_WITH(buffer, "LIST"))
-			list(program, programCounter, false);
+			list(program, programCounter, stdout, false);
 		else if (STRING_STARTS_WITH(buffer, "SHRED"))
-			list(program, programCounter, true);
+			list(program, programCounter, stdout, true);
 		else if (STRING_STARTS_WITH(buffer, "RUN"))
 			run(program);
 		else if (STRING_STARTS_WITH(buffer, "NEW")) {

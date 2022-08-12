@@ -95,11 +95,12 @@ bool atoi_would_work(char* line);
  * Lists the current program (similar to BASICs)
  * @param[in] A compiled Cheese program
  * @param[in] The program counter / size of the program
+ * @param[in] The file to save/print the info to
  * @param[in] If true, print the memory addresses (position in the array)
  * for debugging.  If false, what you get is more like disassembly, where you
  * get code that could be copied/pasted and run again.
  */
-void list(int16_t* program, uint16_t max, bool showAddresses);
+void list(int16_t* program, uint16_t max, FILE* file, bool showAddresses);
 
 /**
  * Runs the current program
@@ -126,20 +127,15 @@ void assemble_file(const char* input, const char* output);
  * Unpacks (disassembles) a .KSO file into Cheese source code
  * @param[in] The file to be disassembled
  * @param[in] The file where the code should be saved
+ * @param[in] If true, print the block addresses (see list())
  */
-void disassemble_file(const char* input, const char* output);
+void disassemble_file(const char* input, const char* output, bool showAddresses);
 
 /**
  * Runs a Cheese program
  * @param[in] The file to run
  */
 void run_file(const char* file);
-
-/**
- * Shreds a Cheese program :)
- * @param[in] The file to run
- */
-void shred_file(const char* file);
 
 /**
  * Shows the available command-line options

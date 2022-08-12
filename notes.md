@@ -1,7 +1,5 @@
 # TO-DO's before I REALLY release 1.0
 
-* Write disassemble_file
-* Write shred_file (maybe rework list() to use fprintf)
 * Write tests for all 30 instructions (and yes, there are 30 - I counted) :)
 * Update the manual
 	- Now that I included an "unknown instruction" error, also include the opcodes.
