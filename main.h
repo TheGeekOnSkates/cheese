@@ -115,6 +115,35 @@ void run(int16_t* program);
  */
 void assemble_line(char* line, int16_t* program, uint16_t *programCounter);
 
+/**
+ * Packs (assembles) a Cheese program into a .KSO file
+ * @param[in] The file to be assembled
+ * @param[in] The file where the code should be saved
+ */
+void assemble_file(const char* input, const char* output);
 
+/**
+ * Unpacks (disassembles) a .KSO file into Cheese source code
+ * @param[in] The file to be disassembled
+ * @param[in] The file where the code should be saved
+ */
+void disassemble_file(const char* input, const char* output);
+
+/**
+ * Runs a Cheese program
+ * @param[in] The file to run
+ */
+void run_file(const char* file);
+
+/**
+ * Shreds a Cheese program :)
+ * @param[in] The file to run
+ */
+void shred_file(const char* file);
+
+/**
+ * Shows the available command-line options
+ */
+void please(void);
 
 #endif

@@ -60,6 +60,10 @@ void run(int16_t* program) {
 				printf("STACK UNDERFLOW\n");
 				return;
 			}
+			if (stack[stackPointer - 1] == 0) {
+				printf("CAN'T DIVIDE BY ZERO.\n");
+				return;
+			}
 			stackPointer--;
 			temp = stack[stackPointer];
 			stack[stackPointer] = 0;
