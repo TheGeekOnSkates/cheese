@@ -1,15 +1,38 @@
 #include "main.h"
 
 void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
-	uint16_t pc = *programCounter;
-	if (STRING_STARTS_WITH(line, "ADD")) {
-		if (!atoi_would_work(line + 3)) {
+	uint16_t pc = *programCounter, temp = 0;
+	if (STRING_STARTS_WITH(line, "ADD #")) {
+		if (!atoi_would_work(line + 5)) {
 			printf("NUMBER REQUIRED\n");
 			return;
 		}
 		program[pc] = ADD;
 		pc++;
-		program[pc] = atoi(line + 3);
+		program[pc] = atoi(line + 5);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "ADD")) {
+		if (!atoi_would_work(line + 3)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = ADD_RAM;
+		pc++;
+		temp = atoi(line + 3);
+		if (temp < 0 || temp > 65536) {
+			printf("ADDRESS OUT OF RANGE\n");
+			return;
+		}
+		program[pc] = temp;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "AFS")) {
+		program[pc] = AFS;
 		pc++;
 		*programCounter = pc;
 		return;
@@ -44,14 +67,37 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		*programCounter = pc;
 		return;
 	}
-	if (STRING_STARTS_WITH(line, "DIV")) {
-		if (!atoi_would_work(line + 3)) {
+	if (STRING_STARTS_WITH(line, "DFS")) {
+		program[pc] = DFS;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "DIV #")) {
+		if (!atoi_would_work(line + 5)) {
 			printf("NUMBER REQUIRED\n");
 			return;
 		}
 		program[pc] = DIV;
 		pc++;
-		program[pc] = atoi(line + 3);
+		program[pc] = atoi(line + 5);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "DIV")) {
+		if (!atoi_would_work(line + 3)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = DIV_RAM;
+		pc++;
+		temp = atoi(line + 3);
+		if (temp < 0 || temp > 65536) {
+			printf("ADDRESS OUT OF RANGE\n");
+			return;
+		}
+		program[pc] = temp;
 		pc++;
 		*programCounter = pc;
 		return;
@@ -104,14 +150,49 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		*programCounter = pc;
 		return;
 	}
-	if (STRING_STARTS_WITH(line, "MOD")) {
-		if (!atoi_would_work(line + 3)) {
+	if (STRING_STARTS_WITH(line, "MFS")) {
+		program[pc] = MFS;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "MOD #")) {
+		if (!atoi_would_work(line + 5)) {
 			printf("NUMBER REQUIRED\n");
 			return;
 		}
 		program[pc] = MOD;
 		pc++;
-		program[pc] = atoi(line + 3);
+		program[pc] = atoi(line + 5);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "MOD")) {
+		if (!atoi_would_work(line + 3)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = MOD_RAM;
+		pc++;
+		temp = atoi(line + 3);
+		if (temp < 0 || temp > 65536) {
+			printf("ADDRESS OUT OF RANGE\n");
+			return;
+		}
+		program[pc] = temp;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "MUL #")) {
+		if (!atoi_would_work(line + 5)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = MUL;
+		pc++;
+		program[pc] = atoi(line + 5);
 		pc++;
 		*programCounter = pc;
 		return;
@@ -121,9 +202,14 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 			printf("NUMBER REQUIRED\n");
 			return;
 		}
-		program[pc] = MUL;
+		program[pc] = MUL_RAM;
 		pc++;
-		program[pc] = atoi(line + 3);
+		temp = atoi(line + 3);
+		if (temp < 0 || temp > 65536) {
+			printf("ADDRESS OUT OF RANGE\n");
+			return;
+		}
+		program[pc] = temp;
 		pc++;
 		*programCounter = pc;
 		return;
@@ -188,20 +274,61 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		*programCounter = pc;
 		return;
 	}
-	if (STRING_STARTS_WITH(line, "SUB")) {
-		if (!atoi_would_work(line + 3)) {
-			printf("NUMBER REQUIRED\n");
-			return;
-		}
-		program[pc] = SUB;
+	if (STRING_STARTS_WITH(line, "RFS")) {
+		program[pc] = RFS;
 		pc++;
-		program[pc] = atoi(line + 3);
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "SFS")) {
+		program[pc] = SFS;
 		pc++;
 		*programCounter = pc;
 		return;
 	}
 	if (STRING_STARTS_WITH(line, "STACK")) {
 		program[pc] = STACK;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "SUB #")) {
+		if (!atoi_would_work(line + 5)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = SUB;
+		pc++;
+		program[pc] = atoi(line + 5);
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "SUB")) {
+		if (!atoi_would_work(line + 3)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = SUB_RAM;
+		pc++;
+		temp = atoi(line + 3);
+		if (temp < 0 || temp > 65536) {
+			printf("ADDRESS OUT OF RANGE\n");
+			return;
+		}
+		program[pc] = temp;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "SYS")) {
+		if (!atoi_would_work(line + 3)) {
+			printf("NUMBER REQUIRED\n");
+			return;
+		}
+		program[pc] = SYS;
+		pc++;
+		program[pc] = atoi(line + 3);
 		pc++;
 		*programCounter = pc;
 		return;

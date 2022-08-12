@@ -34,7 +34,18 @@ enum Instructions {
 	ASC,		/* Print the ASCII character (well, probably Unicode) represented by the number at the top of the stack */
 	PEEK,		/* PUSH the number at <address> to the top of the stack */
 	POKE,		/* POP the number at the top of the stack to <address> */
-	STACK		/* Print the contents of the stack */
+	STACK,		/* Print the contents of the stack */
+	AFS,		/* Add From Stack (POP the top 2 numbers, add them, and PUSh the result) */
+	SFS,		/* Subtract From Stack */
+	MFS,		/* Multiply From Stack */
+	DFS,		/* Divide From Stack */
+	RFS,		/* Remainder ("Modulus") From Stack - sorry Sparticus, M is taken (by MFS) :) */
+	ADD_RAM,	/* Add <memory address> */
+	SUB_RAM,	/* Subtract <memory address> */
+	MUL_RAM,	/* Multiply <memory address> */
+	DIV_RAM,	/* Divide <memory address> */
+	MOD_RAM,	/* Modulus (remainder) <memory address> */
+	SYS		/* Run a system command */
 };
 
 

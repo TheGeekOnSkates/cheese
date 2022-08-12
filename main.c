@@ -10,6 +10,7 @@ int main() {
 	memset(program, 0, 65536 * sizeof(int16_t));
 	
 	/* Main event loop */
+	printf("\nCHEESE 1.0\n");
 	while(true) {
 		
 		/* Get the user's input (I love that prompt, lol) */
@@ -28,8 +29,6 @@ int main() {
 			memset(program, 0, 65536 * sizeof(int16_t));
 			programCounter = 0;
 		}
-		else if (STRING_STARTS_WITH(buffer, "SYS "))
-			system(buffer + 4);
 		else if (STRING_STARTS_WITH(buffer, "EXIT"))
 			break;
 		else

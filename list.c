@@ -8,7 +8,21 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 		switch(program[i]) {
 			case ADD:
 				i++;
+				printf(" ADD #");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case ADD_RAM:
+				i++;
 				printf(" ADD");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case AFS:
+				i++;
+				printf(" AFS");
 				if (showAddresses)
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
@@ -30,7 +44,21 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
+			case DFS:
+				i++;
+				printf(" DFS");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
 			case DIV:
+				i++;
+				printf(" DIV #");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case DIV_RAM:
 				i++;
 				printf(" DIV");
 				if (showAddresses)
@@ -64,15 +92,35 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
+			case MFS:
+				i++;
+				printf(" MFS");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
 			case MOD:
+				i++;
+				printf(" MOD #\n");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case MOD_RAM:
 				i++;
 				printf(" MOD\n");
 				if (showAddresses)
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
-				break;
 			case MUL:
+				i++;
+				printf(" MUL #");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case MUL_RAM:
 				i++;
 				printf(" MUL");
 				if (showAddresses)
@@ -106,7 +154,21 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
+			case SFS:
+				i++;
+				printf(" SFS");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
 			case SUB:
+				i++;
+				printf(" SUB #");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
+				break;
+			case SUB_RAM:
 				i++;
 				printf(" SUB");
 				if (showAddresses)
@@ -115,6 +177,13 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 				break;
 			case STACK:
 				printf(" STACK\n");
+				break;
+			case SYS:
+				i++;
+				printf(" SYS");
+				if (showAddresses)
+					printf("\n %d.", i);
+				printf(" %d\n", program[i]);
 				break;
 		}
 	}

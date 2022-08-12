@@ -5,14 +5,18 @@ void run(int16_t* program) {
 	uint16_t programCounter = 0,
 		stackPointer = 0,
 		i = 0;
+	char tempString[65536];
+	int temp = 0;
 	
 	memset(stack, 0, 65536 * sizeof(int16_t));
 	while(true) {
-		/* printf("\nprogramCounter = %d, stackPointer = %d\n", programCounter, stackPointer); */
 		if (program[programCounter] == ADD) {
 			programCounter++;
 			stack[stackPointer - 1] += program[programCounter];
-			/* printf("sum = %d\n", stack[stackPointer]); */
+		}
+		else if (program[programCounter] == ADD_RAM) {
+			programCounter++;
+			stack[stackPointer - 1] += program[program[programCounter]];
 		}
 		else if (program[programCounter] == ASC) {
 			printf("%lc", stack[stackPointer - 1]);
@@ -42,13 +46,24 @@ void run(int16_t* program) {
 			}
 		}
 		else if (program[programCounter] == DIV) {
+			if (stackPointer == 0) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			programCounter++;
+			if (program[programCounter] == 0) {
+				printf("CAN'T DIVIDE BY ZERO.\n");
+				return;
+			}
+			stack[stackPointer - 1] /= program[programCounter];
+		}
+		else if (program[programCounter] == DIV_RAM) {
 			if (stack[stackPointer - 1] == 0) {
 				printf("CAN'T DIVIDE BY ZERO.\n");
 				return;
 			}
 			programCounter++;
-			stack[stackPointer - 1] /= program[programCounter];
-			/* printf("sum = %d\n", stack[stackPointer]); */
+			stack[stackPointer - 1] /= program[program[programCounter]];
 		}
 		else if (program[programCounter] == DONE) {
 			/* printf("Done.\n"); */
@@ -98,10 +113,18 @@ void run(int16_t* program) {
 			stack[stackPointer - 1] %= program[programCounter];
 			/* printf("sum = %d\n", stack[stackPointer]); */
 		}
+		else if (program[programCounter] == MOD_RAM) {
+			programCounter++;
+			stack[stackPointer - 1] %= program[program[programCounter]];
+			/* printf("sum = %d\n", stack[stackPointer]); */
+		}
 		else if (program[programCounter] == MUL) {
 			programCounter++;
 			stack[stackPointer - 1] *= program[programCounter];
-			/* printf("sum = %d\n", stack[stackPointer]); */
+		}
+		else if (program[programCounter] == MUL_RAM) {
+			programCounter++;
+			stack[stackPointer - 1] *= program[program[programCounter]];
 		}
 		else if (program[programCounter] == POP) {
 			stackPointer--;	/* Because stackPointer actually points at the position AFTER the top of the stack */
@@ -130,7 +153,6 @@ void run(int16_t* program) {
 		else if (program[programCounter] == PUSH) {
 			programCounter++;
 			stack[stackPointer] = program[programCounter];
-			/* printf("stack[%d] = %d\n", stackPointer, stack[stackPointer]); */
 			stackPointer++;
 			if (stackPointer == 0) {
 				printf("STACK OVERFLOW\n");
@@ -147,6 +169,48 @@ void run(int16_t* program) {
 			programCounter++;
 			stack[stackPointer - 1] -= program[programCounter];
 			/* printf("sum = %d\n", stack[stackPointer]); */
+		}
+		else if (program[programCounter] == SUB_RAM) {
+			programCounter++;
+			stack[stackPointer - 1] -= program[program[programCounter]];
+			/* printf("sum = %d\n", stack[stackPointer]); */
+		}
+		else if (program[programCounter] == SYS) {
+			/* Save the program counter */
+			programCounter++;
+			temp = programCounter;
+			
+			/* Move to the address pointed to by program[programCounter] */
+			programCounter = program[programCounter];
+			
+			/* Build tempString till it hits a zero (NULL terminator) or the last address */
+			memset(tempString, 0, 65536);
+			i = 0;
+			while(program[programCounter] != 0 && programCounter < 65536) {
+				tempString[i] = (char)program[programCounter];
+				i++;
+				programCounter++;
+				if (program[programCounter] == 0) {
+					programCounter++;
+					break;
+				}
+			}
+			
+			/* Restore the program counter to where it was */
+			programCounter = temp;
+			
+			/* Run the program and PUSh the result */
+			programCounter++;
+			stack[stackPointer] = (int16_t)system(tempString);
+			stackPointer++;
+			if (stackPointer == 0) {
+				printf("STACK OVERFLOW\n");
+				return;
+			}
+		}
+		else {
+			printf("UNKNOWN INSTRUCTION: %d\n", program[programCounter]);
+			return;
 		}
 		programCounter++;
 	}
