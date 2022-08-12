@@ -1,12 +1,18 @@
 # TO-DO's before I REALLY release 1.0
 
-* I kind of think the "huge upgrade" for 2.0 - compiling and running files - might actually be a useful feature for 1.0; one problem with interactive interpreters like Forth, Python, or Node is that there's no way to go back and edit.  You could technically do that with POKE, but that would require knowing the binary opcodes (the Instructions enum in main.h) - but even I don't know those and I built it!
+* Write disassemble_file
+* Write shred_file (maybe rework list() to use fprintf)
 * Write tests for all 30 instructions (and yes, there are 30 - I counted) :)
 * Update the manual
 	- Now that I included an "unknown instruction" error, also include the opcodes.
+	- Include command-line options documented in please()
 	- Make sure to document which instructions are not available except when RUNning (maybe call it "direct mode" and "program mode" like BASIC)
 	- Also, don't forget to explain why there is a piece of cheese on their terminal :D
-
+	- Also, add the UNLICENSE, or the WTFPL or something like that :)
+	- Oh, one last thing: Explain some of the core concepts that are unique to Cheese:
+		* "Blocks" - not bytes (actually 2-byte addresses) but same idea
+		* Program stack vs. data stack
+Maybe for the manual, use a GitHub wiki (I actually have a placeholder for one in please())
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -17,6 +23,7 @@
 * ROTATE (sorry Forth, ROT is a word and using it doesn't make sense here :D)
 * RANDOM (or RND - idk, 6 chars is not bad, and we already have STACK)
 * A way to move the program counter (similar to "* = <number>" in 6502)
+* Compile-time constants for things like max size of buffer, max stack size, etc.  That way, if I want to port Cheese to some other OS, changing those limits is, well, easy cheesy. :)
 * At first I wanted CLEAR, but now I'm kind of thinking maybe ESC (like in my basic); this way it wouldn't require ncurses or knowledge of every single terminal out there lol; I'd like to keep this in standard C as much as possible).
 * Have SYS work like other instructions: don't run immediately; only run when RUN is called; then, put the end result (the return value of system()) on the stack.
 	Unfortunately, this turned out to be tougher than it looks.  Why?  Because I haven't come up with a way for Cheese to handle strings yet. :D
