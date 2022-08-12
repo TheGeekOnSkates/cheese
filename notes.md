@@ -1,8 +1,6 @@
 # TO-DO's before I REALLY release 1.0
 
-* Finish AFS/SFS/DFS/etc.
 * I kind of think the "huge upgrade" for 2.0 - compiling and running files - might actually be a useful feature for 1.0; one problem with interactive interpreters like Forth, Python, or Node is that there's no way to go back and edit.  You could technically do that with POKE, but that would require knowing the binary opcodes (the Instructions enum in main.h) - but even I don't know those and I built it!
-* That in mind, add support for comments
 * Write tests for all 30 instructions (and yes, there are 30 - I counted) :)
 * Update the manual
 	- Now that I included an "unknown instruction" error, also include the opcodes.

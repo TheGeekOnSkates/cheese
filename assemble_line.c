@@ -2,6 +2,16 @@
 
 void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 	uint16_t pc = *programCounter, temp = 0;
+	char* comment = NULL;
+	
+	/* Strip out comments */
+	comment = strstr(line, "//");
+	if (comment != NULL) {
+		comment[0] = '\0';
+		comment = NULL;
+	}
+	
+	
 	if (STRING_STARTS_WITH(line, "ADD #")) {
 		if (!atoi_would_work(line + 5)) {
 			printf("NUMBER REQUIRED\n");

@@ -21,11 +21,7 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 				printf(" %d\n", program[i]);
 				break;
 			case AFS:
-				i++;
 				printf(" AFS");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
 				break;
 			case ASC:
 				printf(" ASC\n");
@@ -45,11 +41,7 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 				printf(" %d\n", program[i]);
 				break;
 			case DFS:
-				i++;
 				printf(" DFS");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
 				break;
 			case DIV:
 				i++;
@@ -93,11 +85,7 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 				printf(" %d\n", program[i]);
 				break;
 			case MFS:
-				i++;
 				printf(" MFS");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
 				break;
 			case MOD:
 				i++;
@@ -154,12 +142,11 @@ void list(int16_t* program, uint16_t max, bool showAddresses) {
 					printf("\n %d.", i);
 				printf(" %d\n", program[i]);
 				break;
+			case RFS:
+				printf(" RFS");
+				break;
 			case SFS:
-				i++;
 				printf(" SFS");
-				if (showAddresses)
-					printf("\n %d.", i);
-				printf(" %d\n", program[i]);
 				break;
 			case SUB:
 				i++;

@@ -18,6 +18,16 @@ void run(int16_t* program) {
 			programCounter++;
 			stack[stackPointer - 1] += program[program[programCounter]];
 		}
+		else if (program[programCounter] == AFS) {
+			if (stackPointer < 2) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			stackPointer--;
+			temp = stack[stackPointer];
+			stack[stackPointer] = 0;
+			stack[stackPointer - 1] += temp;
+		}
 		else if (program[programCounter] == ASC) {
 			printf("%lc", stack[stackPointer - 1]);
 		}
@@ -44,6 +54,16 @@ void run(int16_t* program) {
 				programCounter += program[programCounter] - 1;
 				/* printf("Branching to %d\n", programCounter + 1); */
 			}
+		}
+		else if (program[programCounter] == DFS) {
+			if (stackPointer < 2) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			stackPointer--;
+			temp = stack[stackPointer];
+			stack[stackPointer] = 0;
+			stack[stackPointer - 1] /= temp;
 		}
 		else if (program[programCounter] == DIV) {
 			if (stackPointer == 0) {
@@ -118,6 +138,16 @@ void run(int16_t* program) {
 			stack[stackPointer - 1] %= program[program[programCounter]];
 			/* printf("sum = %d\n", stack[stackPointer]); */
 		}
+		else if (program[programCounter] == MFS) {
+			if (stackPointer < 2) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			stackPointer--;
+			temp = stack[stackPointer];
+			stack[stackPointer] = 0;
+			stack[stackPointer - 1] *= temp;
+		}
 		else if (program[programCounter] == MUL) {
 			programCounter++;
 			stack[stackPointer - 1] *= program[programCounter];
@@ -158,6 +188,26 @@ void run(int16_t* program) {
 				printf("STACK OVERFLOW\n");
 				return;
 			}
+		}
+		else if (program[programCounter] == RFS) {
+			if (stackPointer < 2) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			stackPointer--;
+			temp = stack[stackPointer];
+			stack[stackPointer] = 0;
+			stack[stackPointer - 1] %= temp;
+		}
+		else if (program[programCounter] == SFS) {
+			if (stackPointer < 2) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			stackPointer--;
+			temp = stack[stackPointer];
+			stack[stackPointer] = 0;
+			stack[stackPointer - 1] -= temp;
 		}
 		else if (program[programCounter] == STACK) {
 			printf("Stack size: %d\n", stackPointer);
