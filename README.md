@@ -10,6 +10,10 @@ This project arose out of an increased curiosity about building low-level progra
 
 So, one night I stumbled acros [this little Stack Overflow post](https://stackoverflow.com/questions/6887471/how-would-i-go-about-writing-an-interpreter-in-c) where the "accepted" answer was sort of a mini-challenge: Build a program with a stack (like Forth has) and 6-7 instructions to do stuff with it.  He called it a "very simple stack based virtual machine".  Challenge accepted!
 
-# Documentation
+## Documentation
 
-I think what I'll end up doing is creating a GitHub wiki.  I do have the beginning of a manual in the 1.0 branch, but it was very incomplete (a bunch of instructions I hadn't written down yet, etc.).
+See the wiki on GitHub
+
+## License
+
+The UNLICENSE.  Best license ever.  Copyright is lame.  Musicians give away their music on the radio, 40-year-old game companies are either gone or don't care about their old ROMs... and you can do whatever you like with this project.
