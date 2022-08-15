@@ -1,0 +1,19 @@
+// CHEESE ASSEMBLY TEST #2:
+// MORE MATH (AFS/SFS/MFS/DFS/RFS, ALSO POP AND DUP)
+
+PUSH 4	// [4]
+PUSH 3	// [4, 3]
+AFS	// [7]
+PUSH 3	// [7, 3]
+MFS	// [21]
+DUP	// [21, 21]
+PUSH 5	// [21, 21, 5]
+DFS	// [21, 4]
+POP	// [21]
+PUSH 5	// [21, 5]
+RFS	// [1]
+PUSH 3	// [1, 3]
+SFS	// [-2]
+PRINT	// PASSES IF IT'S -2
+
+// PASSED on 2022-08-12

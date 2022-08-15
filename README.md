@@ -1,11 +1,15 @@
-# "CHEESE" - AS IN POSSIBLY THE CHEESIEST PROJECT I'VE EVER PLAYED WITH :)
+# 🧀 CHEESE VM
 
-This project arose out of an increased curiosity about building low-level programming/scripting languages.  Of course my BASIC has a practical purpose - in addition to being a fun tool for creating games or little scripts, it's a full Linux shell.  But until I have the time to do a deep-dive into learning valgrind and/or GDB and/or core dumps, finding and fixing the bugs is a job I just don't have time for.  Then I look at real old-time BASICs and Forths and other things, and I'm just amazed at how stable and lightweight and amazing they are.  I do eventually want to get around to debugging my BASIC, and get back on track to adding ridiculously complex features like IF or PRINT... but not tonight. :)
+## What is it?
 
-No, tonight I was doing research on how other people build interpreters when I stumbled on [this little Stack Overflow post](https://stackoverflow.com/questions/6887471/how-would-i-go-about-writing-an-interpreter-in-c) where the "accepted answer" basically says "build a Forth" (lol).  Well not really... I've never seen a Forth with PUSH and POP instructions, much less JUMP like 6502 Assembly has, not to mention the whole "word" thing that makes Forth so awesome is missing... okay, bad analogy.
+A fun "virtual machine" (and an assembly language for it) that I built in under a week (not for one of those 7-day code challenges, unfortunately).  
 
-Basically the idea this guy suggested is to build "a very simple stack based virtual machine".  Now I love tinkering with "virtual machines" - taking a 6502 simulator and "wiring it up" to other stuff, making up my own little instruction set and writing little programs for it etc... but of all the goofy, pointless, ridiculous fun...!  I mean the end result is not something I would create games with.  It's not something I would use as a shell for any OS, modern or retro.  It's so ridiculously cheesy that the best name I could come up with is "Cheese". :D
+## Background
 
-Of course if I expand it as the guy suggested, the idea of a program being "written in cheese" sounds like a hilarious waste of cheddar. :D
+This project arose out of an increased curiosity about building low-level programming/scripting languages.  Of course my BASIC has 2 practical uses - games and shell scripts.  But at the time of this writing it was a crashy mess I didn't feel like debugging.  I wanted something that was fun, and could never feel like work.  Not only that, I wanted to know how "real" BASICs (particularly the 8-bit ones) could be so stable and robust and fit into ~8K of memory.
 
-Okay seriously now, this is something I'm doing as a fun learning exercise, with no plans beyond "let's see if I can do what this guy suggested, learn a thing or three, and maybe (if it goes really really really well) see if I can apply some of that learning to Breakaway BASIC."  Probably not.  But it looks like fun, so here we are. :)
+So, one night I stumbled acros [this little Stack Overflow post](https://stackoverflow.com/questions/6887471/how-would-i-go-about-writing-an-interpreter-in-c) where the "accepted" answer was sort of a mini-challenge: Build a program with a stack (like Forth has) and 6-7 instructions to do stuff with it.  He called it a "very simple stack based virtual machine".  Challenge accepted!
+
+# Documentation
+
+I think what I'll end up doing is creating a GitHub wiki.  I do have the beginning of a manual in the 1.0 branch, but it was very incomplete (a bunch of instructions I hadn't written down yet, etc.).
