@@ -1,20 +1,3 @@
-# TO-DO's before I REALLY release 1.0
-
-* Write tests for all 30 instructions (and yes, there are 30 - I counted) :)
-* Update the manual
-	- Now that I included an "unknown instruction" error, also include the opcodes.
-	- Include command-line options documented in please()
-	- Make sure to document which instructions are not available except when RUNning (maybe call it "direct mode" and "program mode" like BASIC)
-	- Also, don't forget to explain why there is a piece of cheese on their terminal :D
-	- Also, add the UNLICENSE, or the WTFPL or something like that :)
-	- Oh, one last thing: Explain some of the core concepts that are unique to Cheese:
-		* "Blocks" - not bytes (actually 2-byte addresses) but same idea
-		* Program stack vs. data stack
-Maybe for the manual, use a GitHub wiki (I actually have a placeholder for one in please())
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 ## Features for future 1.x releases
 
 * SWAP
