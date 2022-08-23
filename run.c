@@ -229,6 +229,17 @@ void run(int16_t* program) {
 			stack[stackPointer - 1] -= program[program[programCounter]];
 			/* printf("sum = %d\n", stack[stackPointer]); */
 		}
+		else if (program[programCounter] == SWAP) {
+			if (stackPointer < 2) {
+				printf("STACK UNDERFLOW\n");
+				return;
+			}
+			stackPointer--;
+			temp = stack[stackPointer];
+			stack[stackPointer] = stack[stackPointer - 1];
+			stack[stackPointer - 1] = temp;
+			stackPointer++;
+		}
 		else if (program[programCounter] == SYS) {
 			/* Save the program counter */
 			programCounter++;

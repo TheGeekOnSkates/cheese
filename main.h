@@ -45,7 +45,8 @@ enum Instructions {
 	MUL_RAM,	/* Multiply <memory address> */
 	DIV_RAM,	/* Divide <memory address> */
 	MOD_RAM,	/* Modulus (remainder) <memory address> */
-	SYS		/* Run a system command */
+	SYS,		/* Run a system command */
+	SWAP		/* Swap the top 2 numbers on the stack */
 };
 
 

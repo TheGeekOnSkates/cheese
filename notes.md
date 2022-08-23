@@ -1,6 +1,5 @@
 ## Features for future 1.x releases
 
-* SWAP
 * ROTATE (sorry Forth, ROT is a word and using it doesn't make sense here :D)
 * RANDOM (or RND - idk, 6 chars is not bad, and we already have STACK)
 * A way to move the program counter (similar to "* = <number>" in 6502)

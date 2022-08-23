@@ -11,7 +11,6 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 		comment = NULL;
 	}
 	
-	
 	if (STRING_STARTS_WITH(line, "ADD #")) {
 		if (!atoi_would_work(line + 5)) {
 			printf("NUMBER REQUIRED\n");
@@ -327,6 +326,12 @@ void assemble_line(char* line, int16_t* program, uint16_t *programCounter) {
 			return;
 		}
 		program[pc] = temp;
+		pc++;
+		*programCounter = pc;
+		return;
+	}
+	if (STRING_STARTS_WITH(line, "SWAP")) {
+		program[pc] = SWAP;
 		pc++;
 		*programCounter = pc;
 		return;
